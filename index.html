@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitin Bhatt - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&family=Bungee+Shade&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 25%, #FDC830 50%, #F37335 75%, #E94B3C 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Film strip decoration */
+        .film-strip {
+            position: fixed;
+            width: 60px;
+            height: 100%;
+            background: #1a1a1a;
+            border-left: 3px solid #333;
+            border-right: 3px solid #333;
+        }
+
+        .film-strip.left {
+            left: 0;
+            top: 0;
+        }
+
+        .film-strip.right {
+            right: 0;
+            top: 0;
+        }
+
+        .film-strip::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 20px,
+                #333 20px,
+                #333 30px
+            );
+        }
+
+        .film-holes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 15px,
+                #000 15px,
+                #000 25px
+            );
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Marquee/Poster style header */
+        .header {
+            background: linear-gradient(45deg, #8B0000, #DC143C, #FF1493);
+            border: 8px solid #FFD700;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow:
+                0 0 0 4px #8B0000,
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from { box-shadow:
+                0 0 0 4px #8B0000,
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(255,255,255,0.1),
+                0 0 20px #FFD700;
+            }
+            to { box-shadow:
+                0 0 0 4px #8B0000,
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(255,255,255,0.1),
+                0 0 40px #FFD700,
+                0 0 60px #FFD700;
+            }
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50%, 50%); }
+        }
+
+        .title {
+            font-family: 'Bungee Shade', cursive;
+            font-size: 5rem;
+            color: #FFD700;
+            text-shadow:
+                5px 5px 0 #000,
+                10px 10px 0 #8B0000,
+                15px 15px 20px rgba(0,0,0,0.7);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            animation: titleBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-family: 'Righteous', cursive;
+            font-size: 2rem;
+            color: #FFF;
+            text-shadow:
+                3px 3px 0 #000,
+                6px 6px 10px rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 2;
+            letter-spacing: 3px;
+        }
+
+        /* Content section */
+        .content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 6px solid #FFD700;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow:
+                0 0 0 3px #DC143C,
+                0 15px 40px rgba(0,0,0,0.6);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '★';
+            position: absolute;
+            font-size: 200px;
+            color: rgba(255, 215, 0, 0.05);
+            top: -50px;
+            right: -30px;
+            transform: rotate(-15deg);
+        }
+
+        .about {
+            color: #FFF;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Links section */
+        .links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .link-button {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            padding: 20px 50px;
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: #FFF;
+            text-decoration: none;
+            border: 5px solid #FFD700;
+            border-radius: 10px;
+            box-shadow:
+                0 0 0 3px #8B0000,
+                5px 5px 0 #000,
+                10px 10px 20px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+
+        .link-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow:
+                0 0 0 3px #8B0000,
+                7px 7px 0 #000,
+                15px 15px 30px rgba(0,0,0,0.6),
+                0 0 30px #FFD700;
+        }
+
+        .link-button:active {
+            transform: translate(3px, 3px);
+            box-shadow:
+                0 0 0 3px #8B0000,
+                2px 2px 0 #000,
+                5px 5px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Section heading */
+        .section-heading {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-align: center;
+            text-shadow:
+                3px 3px 0 #000,
+                6px 6px 0 #DC143C,
+                9px 9px 15px rgba(0,0,0,0.7);
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Coming soon message */
+        .coming-soon {
+            color: #FFF;
+            font-size: 1.5rem;
+            text-align: center;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Patents list */
+        .patents-list {
+            position: relative;
+            z-index: 2;
+        }
+
+        .patent-item {
+            background: rgba(139, 0, 0, 0.3);
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .patent-item:hover {
+            background: rgba(139, 0, 0, 0.5);
+            transform: translateX(5px);
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .patent-item a {
+            color: #FFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            display: block;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .patent-item a:hover {
+            color: #FFD700;
+        }
+
+        .patent-title {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .patent-number {
+            color: #F7931E;
+            font-size: 1rem;
+            font-family: monospace;
+        }
+
+        /* Patent preview on hover */
+        .patent-preview {
+            position: absolute;
+            left: 105%;
+            top: 0;
+            width: 400px;
+            height: 300px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+            border: 5px solid #FFD700;
+            border-radius: 10px;
+            box-shadow:
+                0 0 0 3px #DC143C,
+                0 10px 30px rgba(0,0,0,0.8),
+                0 0 40px rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .patent-item:hover .patent-preview {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .patent-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.8);
+            transform-origin: top left;
+        }
+
+        .patent-preview-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            color: #FFD700;
+            padding: 5px 10px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 0.9rem;
+            text-align: center;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #FFD700;
+            font-family: 'Righteous', cursive;
+            font-size: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-top: 20px;
+            padding: 15px;
+            position: relative;
+            z-index: 10;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative elements */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            color: #FFD700;
+            font-size: 2rem;
+            animation: twinkle 3s ease-in-out infinite;
+            text-shadow: 0 0 10px #FFD700;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .star:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 60%; left: 10%; animation-delay: 1s; }
+        .star:nth-child(4) { bottom: 15%; right: 15%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 40%; right: 25%; animation-delay: 2s; }
+        .star:nth-child(6) { bottom: 30%; left: 20%; animation-delay: 2.5s; }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .film-strip {
+                width: 40px;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+
+            .title {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .header {
+                padding: 40px 20px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .about {
+                font-size: 1.1rem;
+            }
+
+            .link-button {
+                font-size: 1.5rem;
+                padding: 15px 35px;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Hide preview on mobile */
+            .patent-preview {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Film strip decorations -->
+    <div class="film-strip left">
+        <div class="film-holes"></div>
+    </div>
+    <div class="film-strip right">
+        <div class="film-holes"></div>
+    </div>
+
+    <!-- Decorative stars -->
+    <div class="stars">
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+    </div>
+
+    <div class="container">
+        <!-- Header section -->
+        <div class="header">
+            <h1 class="title">NITIN BHATT</h1>
+            <p class="subtitle">Developer • Creator • Innovator</p>
+        </div>
+
+        <!-- Content section -->
+        <div class="content">
+            <div class="about">
+                <p>Welcome to my corner of the internet! I'm a passionate developer who loves building amazing things with code.</p>
+            </div>
+
+            <!-- Social links -->
+            <div class="links">
+                <a href="https://linkedin.com/in/nitinbhatt" class="link-button" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                </a>
+                <a href="https://github.com/nitinbhatt" class="link-button" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </div>
+        </div>
+
+        <!-- Projects section -->
+        <div class="content">
+            <h2 class="section-heading">PROJECTS</h2>
+            <p class="coming-soon">Coming Soon...</p>
+        </div>
+
+        <!-- Patents section -->
+        <div class="content">
+            <h2 class="section-heading">PATENTS</h2>
+            <div class="patents-list">
+                <div class="patent-item">
+                    <a href="https://patents.google.com/patent/US10310762B1/en?q=(Nitin+Bhatt)&assignee=EMC+IP+Holding+Company+LLC" target="_blank" rel="noopener noreferrer">
+                        <div class="patent-title">Lease-based leader designation for multiple processes accessing storage resources of a storage system</div>
+                        <div class="patent-number">Patent No: US10310762B1</div>
+                    </a>
+                    <div class="patent-preview">
+                        <div class="patent-preview-label">PREVIEW</div>
+                        <iframe src="https://patents.google.com/patent/US10310762B1/en" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="patent-item">
+                    <a href="https://patents.google.com/patent/US10263998B1/en?q=(Nitin+Bhatt)&assignee=EMC+IP+Holding+Company+LLC" target="_blank" rel="noopener noreferrer">
+                        <div class="patent-title">Automated determination of relevance of a security alert to one or more other security alerts based on shared markers</div>
+                        <div class="patent-number">Patent No: US10263998B1</div>
+                    </a>
+                    <div class="patent-preview">
+                        <div class="patent-preview-label">PREVIEW</div>
+                        <iframe src="https://patents.google.com/patent/US10263998B1/en" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            ✨ I vibe coded this ✨
+        </div>
+    </div>
+</body>
+</html>
